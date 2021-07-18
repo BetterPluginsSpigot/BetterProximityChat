@@ -1,1 +1,3 @@
 player.join: "Welcome to BetterProximityChat, a server in which you are only able to chat with nearby players, thus giving a more realistic experience. Send a message <PlayerName>!"
+
+players.notfound: "No players within range. Your message was dropped."

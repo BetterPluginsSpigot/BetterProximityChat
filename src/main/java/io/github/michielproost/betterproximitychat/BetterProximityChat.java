@@ -73,7 +73,7 @@ public class BetterProximityChat extends JavaPlugin {
                 new Messenger(
                         localisation.getMessages(),
                         new BPLogger(Level.WARNING),
-                        ChatColor.RED + "[BPC] " + ChatColor.BLACK
+                        ChatColor.YELLOW + "[BPC] " + ChatColor.BLUE
                 );
 
         // Register listener.
