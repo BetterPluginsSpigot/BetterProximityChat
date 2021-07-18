@@ -2,6 +2,7 @@ package io.github.michielproost.betterproximitychat.events;
 
 import be.betterplugins.core.messaging.messenger.Messenger;
 import be.betterplugins.core.messaging.messenger.MsgEntry;
+import io.github.michielproost.betterproximitychat.BetterProximityChat;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -21,16 +22,19 @@ public class EventListener implements Listener {
 
     private final Messenger messenger;
     private final YamlConfiguration config;
+    private final BetterProximityChat plugin;
 
     /**
      * Create a new EventListener.
      * @param config The YAML configuration.
      * @param messenger The messenger.
+     * @param plugin The BetterProximityChat plugin.
      */
-    public EventListener(Messenger messenger, YamlConfiguration config)
+    public EventListener(Messenger messenger, YamlConfiguration config, BetterProximityChat plugin)
     {
         this.messenger = messenger;
         this.config = config;
+        this.plugin = plugin;
     }
 
     /**
@@ -47,6 +51,7 @@ public class EventListener implements Listener {
                     "player.join",
                     new MsgEntry( "<PlayerName>", event.getPlayer().getDisplayName() )
             );
+        messenger.sendMessage( event.getPlayer() ,"state.on" );
     }
 
     /**
@@ -56,28 +61,31 @@ public class EventListener implements Listener {
     @EventHandler( priority = EventPriority.HIGHEST )
     public void onPlayerChat( AsyncPlayerChatEvent event )
     {
-        // The player that send the message.
-        Player sender = event.getPlayer();
+        if ( plugin.isProximityChatOn() )
+        {
+            // The player that send the message.
+            Player sender = event.getPlayer();
 
-        // Remove recipients from event.
-        event.getRecipients().clear();
+            // Remove recipients from event.
+            event.getRecipients().clear();
 
-        // Send message to each nearby player.
-        ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, config.getDouble( "chatRadius") );
+            // Send message to each nearby player.
+            ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, config.getDouble( "chatRadius") );
 
-        // Other players are within range.
-        if ( nearbyPlayers.size() > 0 ){
-            // Set new recipients.
-            event.getRecipients().addAll( nearbyPlayers );
-            // Set yourself.
-            event.getRecipients().add( sender );
-            messenger.sendMessage(
-                    sender,
-                    "players.found",
-                    new MsgEntry("<FoundPlayersAmount>", nearbyPlayers.size())
-            );
-        } else {
-            messenger.sendMessage( sender, "players.notfound");
+            // Other players are within range.
+            if ( nearbyPlayers.size() > 0 ){
+                // Set new recipients.
+                event.getRecipients().addAll( nearbyPlayers );
+                // Set yourself.
+                event.getRecipients().add( sender );
+                messenger.sendMessage(
+                        sender,
+                        "players.found",
+                        new MsgEntry("<FoundPlayersAmount>", nearbyPlayers.size())
+                );
+            } else {
+                messenger.sendMessage( sender, "players.notfound");
+            }
         }
     }
 

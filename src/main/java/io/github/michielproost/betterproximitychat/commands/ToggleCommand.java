@@ -57,17 +57,9 @@ public class ToggleCommand extends PlayerBPCommand {
 
         // Notify player about state of proximity chat.
         if ( plugin.isProximityChatOn( ) )
-            messenger.sendMessage(
-                    player,
-                    "state.info",
-                    new MsgEntry( "<ProximityChatState>", "on" )
-            );
+            messenger.sendMessage( player,"state.on" );
         else
-            messenger.sendMessage(
-                    player,
-                    "state.info",
-                    new MsgEntry( "<ProximityChatState>", "off" )
-            );
+            messenger.sendMessage( player,"state.off" );
 
         // Command was used correctly.
         return true;

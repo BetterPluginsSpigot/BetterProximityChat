@@ -81,12 +81,12 @@ public class BetterProximityChat extends JavaPlugin {
                 );
 
         // Register listener.
-        EventListener eventListener = new EventListener( messenger, config );
+        EventListener eventListener = new EventListener( messenger, config, this );
         this.getServer().getPluginManager().registerEvents( eventListener, this );
 
         // Register commands.
         CommandHandler commandHandler = new CommandHandler( messenger, this );
-        this.getCommand("betterrecycling").setExecutor( commandHandler );
+        this.getCommand("betterproximitychat").setExecutor( commandHandler );
     }
 
     @Override
