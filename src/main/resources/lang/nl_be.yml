@@ -1,0 +1,4 @@
+player.join: "Welkom bij BetterProximityChat, een server waarop je alleen kunt chatten met spelers in de buurt, waardoor je een meer realistische ervaring krijgt. Stuur een bericht <PlayerName>!"
+
+players.notfound: "Geen spelers binnen bereik. Je bericht is verwijderd."
+players.found: "Je bericht is verzonden naar <FoundPlayersAmount> spelers binnen bereik."

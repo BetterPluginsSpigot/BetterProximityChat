@@ -3,3 +3,4 @@ player.join: {player.join}
 
 # PROXIMITY CHAT
 players.notfound: {players.notfound}
+players.found: {players.found}

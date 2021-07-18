@@ -69,6 +69,13 @@ public class EventListener implements Listener {
         if ( nearbyPlayers.size() > 0 ){
             // Set new recipients.
             event.getRecipients().addAll( nearbyPlayers );
+            // Set yourself.
+            event.getRecipients().add( sender );
+            messenger.sendMessage(
+                    sender,
+                    "players.found",
+                    new MsgEntry("<FoundPlayersAmount>", nearbyPlayers.size())
+            );
         } else {
             messenger.sendMessage( sender, "players.notfound");
         }
