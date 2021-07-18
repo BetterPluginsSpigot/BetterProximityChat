@@ -2,3 +2,21 @@ name: BetterProximityChat
 author: MichielProost
 main: io.github.michielproost.betterproximitychat.BetterProximityChat
 version: 1.0.0
+commands:
+  betterproximitychat:
+    description: BetterProximityChat commands
+    permission: betterproximitychat
+    usage: Issue the command by typing /betterproximitychat in the console.
+    aliases: [bpc]
+permissions:
+  betterproximitychat:
+    default: true
+  betterproximitychat.*:
+    default: op
+    children:
+      betterproximitychat.help: true
+      betterproximitychat.toggle: true
+  betterproximitychat.help:
+    default: true
+  betterproximitychat.toggle:
+    default: op

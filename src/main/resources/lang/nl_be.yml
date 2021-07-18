@@ -1,4 +1,7 @@
 player.join: "Welkom bij BetterProximityChat, een server waarop je alleen kunt chatten met spelers in de buurt, waardoor je een meer realistische ervaring krijgt. Stuur een bericht <PlayerName>!"
 
+help.intro: "Welkom bij BetterProximityChat <PlayerName>! Je vind een lijst van alle mogelijke commando's beneden."
+help.toggle: "<Command>: Schakel proximity chat aan of uit."
+
 players.notfound: "Geen spelers binnen bereik. Je bericht is verwijderd."
 players.found: "Je bericht is verzonden naar <FoundPlayersAmount> spelers binnen bereik."
