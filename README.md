@@ -9,7 +9,7 @@ Welcome to BetterProximityChat, a server in which you are only able to chat with
 - `/bpc help`
   - Shows an explanation of the commands
   - `betterproximitychat.help`
-- `/br toggle` or `/br t`
+- `/bpc toggle` or `/bpc t`
   - Toggle between proximity chat on or off.
   - `betterproximitychat.toggle`
 
