@@ -7,13 +7,14 @@ import io.github.michielproost.betterproximitychat.BetterProximityChat;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class used to handle the BetterRecycling commands.
+ * Class used to handle the BetterProximityChat commands.
  * @author Michiel Proost
  */
 public class CommandHandler implements CommandExecutor {
@@ -29,14 +30,15 @@ public class CommandHandler implements CommandExecutor {
      * Create a CommandHandler.
      * @param messenger The messenger.
      * @param plugin The BetterProximityChat plugin.
+     * @param config The YAML configuration.
      */
-    public CommandHandler( Messenger messenger, BetterProximityChat plugin )
+    public CommandHandler(Messenger messenger, BetterProximityChat plugin, YamlConfiguration config )
     {
         // Initialize the messenger.
         this.messenger = messenger;
 
         // Toggle command.
-        PlayerBPCommand toggle = new ToggleCommand( messenger, plugin );
+        PlayerBPCommand toggle = new ToggleCommand( messenger, plugin, config );
 
         // Create map.
         this.commands = new HashMap<String, PlayerBPCommand>()

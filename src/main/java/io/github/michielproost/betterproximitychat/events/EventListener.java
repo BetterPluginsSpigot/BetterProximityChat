@@ -51,7 +51,14 @@ public class EventListener implements Listener {
                     "player.join",
                     new MsgEntry( "<PlayerName>", event.getPlayer().getDisplayName() )
             );
-        messenger.sendMessage( event.getPlayer() ,"state.on" );
+        for (Player players: Bukkit.getOnlinePlayers()) {
+            messenger.sendMessage( players,"state.on" );
+            messenger.sendMessage(
+                    players,
+                    "state.range",
+                    new MsgEntry( "<ChatRange>", config.getDouble( "chatRange") )
+            );
+        }
     }
 
     /**
@@ -70,7 +77,7 @@ public class EventListener implements Listener {
             event.getRecipients().clear();
 
             // Send message to each nearby player.
-            ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, config.getDouble( "chatRadius") );
+            ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, config.getDouble( "chatRange") );
 
             // Other players are within range.
             if ( nearbyPlayers.size() > 0 ){

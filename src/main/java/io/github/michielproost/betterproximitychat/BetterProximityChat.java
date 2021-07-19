@@ -85,7 +85,7 @@ public class BetterProximityChat extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents( eventListener, this );
 
         // Register commands.
-        CommandHandler commandHandler = new CommandHandler( messenger, this );
+        CommandHandler commandHandler = new CommandHandler( messenger, this, config );
         this.getCommand("betterproximitychat").setExecutor( commandHandler );
     }
 

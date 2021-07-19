@@ -9,4 +9,6 @@ help.t: {help.toggle}
 # PROXIMITY CHAT
 players.notfound: {players.notfound}
 players.found: {players.found}
-state.info: {state.info}
+state.on: {state.on}
+state.off: {state.off}
+state.range: {state.range}
