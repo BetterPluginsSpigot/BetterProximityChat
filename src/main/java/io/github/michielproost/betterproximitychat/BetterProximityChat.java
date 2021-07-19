@@ -6,6 +6,7 @@ import be.dezijwegel.betteryaml.BetterLang;
 import be.dezijwegel.betteryaml.OptionalBetterYaml;
 import io.github.michielproost.betterproximitychat.commands.CommandHandler;
 import io.github.michielproost.betterproximitychat.events.EventListener;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -47,6 +48,10 @@ public class BetterProximityChat extends JavaPlugin {
     public void onEnable()
     {
         super.onEnable();
+
+        // Plugin ID for bStats.
+        int pluginId = 12115;
+        Metrics metrics = new Metrics(this, pluginId );
 
         // Get configuration from BetterYaml.
         OptionalBetterYaml optionalConfig = new OptionalBetterYaml("config.yml", this);
