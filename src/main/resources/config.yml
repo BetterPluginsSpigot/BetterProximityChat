@@ -1,3 +1,3 @@
 language: "en_us"
 welcomeMessage: true
-chatRadius: 5
+chatRange: 50

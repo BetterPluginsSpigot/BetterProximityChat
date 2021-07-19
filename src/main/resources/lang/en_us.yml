@@ -1,1 +1,10 @@
 player.join: "Welcome to BetterProximityChat, a server in which you are only able to chat with nearby players, thus giving a more realistic experience. Send a message <PlayerName>!"
+
+help.intro: "Welcome to BetterProximityChat <PlayerName>! You can find a list of all available commands down below."
+help.toggle: "<Command>: Toggle between proximity chat on or off."
+
+players.notfound: "No players within range. Your message was dropped."
+players.found: "Your message has been send to <FoundPlayersAmount> players within range."
+state.on: "Proximity chat is on."
+state.off: "Proximity chat is off."
+state.range: "The proximity chat range is: <ChatRange>"

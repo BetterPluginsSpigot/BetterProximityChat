@@ -1,2 +1,14 @@
 # PLAYER
 player.join: {player.join}
+
+# HELP
+help.intro: {help.intro}
+help.toggle: {help.toggle}
+help.t: {help.toggle}
+
+# PROXIMITY CHAT
+players.notfound: {players.notfound}
+players.found: {players.found}
+state.on: {state.on}
+state.off: {state.off}
+state.range: {state.range}
