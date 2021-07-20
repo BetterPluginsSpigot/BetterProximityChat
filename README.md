@@ -9,11 +9,15 @@ Welcome to BetterProximityChat, a server in which you are only able to chat with
 - `/bpc help`
   - Shows an explanation of the commands
   - `betterproximitychat.help`
-- `/br toggle` or `/br t`
+- `/bpc toggle` or `/bpc t`
   - Toggle between proximity chat on or off.
   - `betterproximitychat.toggle`
+- `/bpc reload` or `/bpc r`
+  - Reloads the plugin's configuration files.
+  - `betterproximitychat.reload`
 
 ## BetterProximityChat versions with key upgrades
 | BetterProximityChat Version        | Key upgrades           | 
 | ------------- |:-------------:| 
 | [V1.0.0](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.0)    | Initial version | 
+| [V1.0.1](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.1)    | Reload command + Version check | 
