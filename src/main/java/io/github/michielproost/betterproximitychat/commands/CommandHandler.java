@@ -8,6 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -39,6 +40,8 @@ public class CommandHandler implements CommandExecutor {
 
         // Toggle command.
         PlayerBPCommand toggle = new ToggleCommand( messenger, plugin, config );
+        // Reload command.
+        PlayerBPCommand reload = new ReloadCommand( messenger, plugin );
 
         // Create map.
         this.commands = new HashMap<String, PlayerBPCommand>()
@@ -47,6 +50,10 @@ public class CommandHandler implements CommandExecutor {
             put(toggle.getCommandName(), toggle);
             for ( String alias: toggle.getAliases() ){
                 put(alias, toggle);
+            }
+            put(reload.getCommandName(), reload);
+            for (String alias: reload.getAliases() ){
+                put(alias, reload);
             }
         }};
 
