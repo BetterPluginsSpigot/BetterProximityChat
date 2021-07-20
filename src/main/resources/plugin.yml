@@ -1,7 +1,7 @@
 name: BetterProximityChat
 author: MichielProost
 main: io.github.michielproost.betterproximitychat.BetterProximityChat
-version: 1.0.0
+version: 1.0.1
 commands:
   betterproximitychat:
     description: BetterProximityChat commands
