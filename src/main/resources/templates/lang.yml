@@ -5,6 +5,8 @@ player.join: {player.join}
 help.intro: {help.intro}
 help.toggle: {help.toggle}
 help.t: {help.toggle}
+help.reload: {help.reload}
+help.r: {help.reload}
 
 # PROXIMITY CHAT
 players.notfound: {players.notfound}
