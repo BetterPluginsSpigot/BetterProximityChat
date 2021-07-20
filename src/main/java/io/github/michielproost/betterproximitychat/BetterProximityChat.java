@@ -6,7 +6,9 @@ import be.dezijwegel.betteryaml.BetterLang;
 import be.dezijwegel.betteryaml.OptionalBetterYaml;
 import io.github.michielproost.betterproximitychat.commands.CommandHandler;
 import io.github.michielproost.betterproximitychat.events.EventListener;
+import io.github.michielproost.betterproximitychat.util.UpdateChecker;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -77,6 +79,18 @@ public class BetterProximityChat extends JavaPlugin {
         // Get localisation.
         BetterLang localisation = new BetterLang("lang.yml", language + ".yml", this);
 
+        double chatRange = config.getDouble("chatRange");
+        String chatRangeText;
+        if (chatRange < 5)
+            chatRangeText = "[0 - 5[";
+        else if (chatRange >= 5 && chatRange < 10)
+            chatRangeText = "[5 - 10[";
+        else if (chatRange >= 10 && chatRange < 50)
+            chatRangeText = "[10 - 50[";
+        else
+            chatRangeText = "[50 - inf[";
+        metrics.addCustomChart( new SimplePie("chatrange",()-> chatRangeText ) );
+
         // Create messenger.
         Messenger messenger =
                 new Messenger(
@@ -92,12 +106,26 @@ public class BetterProximityChat extends JavaPlugin {
         // Register commands.
         CommandHandler commandHandler = new CommandHandler( messenger, this, config );
         this.getCommand("betterproximitychat").setExecutor( commandHandler );
+
+        // Start UpdateChecker in a separate thread to not completely block the server.
+        Thread updateChecker = new UpdateChecker(this);
+        updateChecker.start();
+
     }
 
     @Override
     public void onDisable()
     {
         super.onDisable();
+    }
+
+    /**
+     * Reloads BetterProximityChat plugin.
+     */
+    public void reload()
+    {
+        this.onDisable();
+        this.onEnable();
     }
 
     /**

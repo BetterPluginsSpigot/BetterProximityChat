@@ -12,3 +12,6 @@ players.found: {players.found}
 state.on: {state.on}
 state.off: {state.off}
 state.range: {state.range}
+
+# RELOAD
+reload.complete: {reload.complete}

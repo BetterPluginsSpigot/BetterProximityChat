@@ -16,7 +16,10 @@ permissions:
     children:
       betterproximitychat.help: true
       betterproximitychat.toggle: true
+      betterproximitychat.reload: true
   betterproximitychat.help:
     default: true
   betterproximitychat.toggle:
+    default: op
+  betterproximitychat.reload:
     default: op
