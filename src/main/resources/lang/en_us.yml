@@ -12,3 +12,5 @@ state.chatrange: "The proximity chat range is: <ChatRange>"
 state.noise: "Noise is enabled."
 
 reload.complete: "Reload complete."
+
+permission.required: "You don't have permission to execute the following command: <Command>"

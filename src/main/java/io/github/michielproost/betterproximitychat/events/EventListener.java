@@ -99,8 +99,16 @@ public class EventListener implements Listener {
                     for (Player player: nearbyPlayers) {
                         // Calculate distance.
                         double distance = sender.getLocation().distance( player.getLocation() );
+                        // Get degree of noise polynomial.
+                        int degree = config.getInt("noisePolynomialDegree");
+                        // Limit degree.
+                        if (degree < 1)
+                            degree = 1;
+                        else if (degree > 20)
+                            degree = 20;
                         // Calculate chance of error.
                         double chanceError = distance / chatRange;
+                        chanceError = Math.pow( chanceError, degree );
                         // Generate new message based on noise.
                         String message = MessageUtil.addNoise( event.getMessage(), chanceError );
                         // Send generated message to nearby player.

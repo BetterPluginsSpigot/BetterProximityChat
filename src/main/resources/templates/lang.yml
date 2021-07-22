@@ -25,3 +25,6 @@ state.noise: {state.noise}
 
 # Reload Command
 reload.complete: {reload.complete}
+
+# Permissions
+permission.required: {permission.required}

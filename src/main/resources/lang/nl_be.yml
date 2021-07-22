@@ -12,3 +12,5 @@ state.chatrange: "Het proximity chat bereik is: <ChatRange>"
 state.noise: "Ruis staat aan."
 
 reload.complete: "Herladen voltooid."
+
+permission.required: "Je hebt geen toestemming om het volgende commando uit te voeren: <Command>"
