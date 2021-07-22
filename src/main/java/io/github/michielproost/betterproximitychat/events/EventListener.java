@@ -111,6 +111,8 @@ public class EventListener implements Listener {
                         chanceError = Math.pow( chanceError, degree );
                         // Generate new message based on noise.
                         String message = MessageUtil.addNoise( event.getMessage(), chanceError );
+                        // Add username to message.
+                        message = "<" + sender.getDisplayName() + "> " + message;
                         // Send generated message to nearby player.
                         player.sendMessage( message );
                     }
