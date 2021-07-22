@@ -111,11 +111,11 @@ public class EventListener implements Listener {
                 messenger.sendMessage(
                         sender,
                         "players.found",
-                        new MsgEntry("<FoundPlayersAmount>", nearbyPlayers.size())
+                        new MsgEntry("<FoundPlayersAmount>", nearbyPlayers.size() )
                 );
             } else {
                 // Notify sender that there are no nearby players.
-                messenger.sendMessage( sender, "players.notfound");
+                messenger.sendMessage( sender, "players.notfound" );
             }
         }
     }

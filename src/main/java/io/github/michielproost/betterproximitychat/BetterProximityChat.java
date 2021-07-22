@@ -12,6 +12,7 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -116,6 +117,7 @@ public class BetterProximityChat extends JavaPlugin {
     @Override
     public void onDisable()
     {
+        HandlerList.unregisterAll( this );
         super.onDisable();
     }
 
