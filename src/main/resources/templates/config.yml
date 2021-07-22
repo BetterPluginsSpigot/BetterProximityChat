@@ -1,3 +1,5 @@
 language: {language}
 welcomeMessage: {welcomeMessage}
+noiseEnabled: {noiseEnabled}
 chatRange: {chatRange}
+noiseRange: {noiseRange}

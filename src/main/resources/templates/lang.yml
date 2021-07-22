@@ -13,7 +13,8 @@ players.notfound: {players.notfound}
 players.found: {players.found}
 state.on: {state.on}
 state.off: {state.off}
-state.range: {state.range}
+state.chatrange: {state.chatrange}
+state.noiserange: {state.noiserange}
 
 # RELOAD
 reload.complete: {reload.complete}

@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,19 +64,21 @@ public class ToggleCommand extends PlayerBPCommand {
         // Notify player about state of proximity chat.
         if ( plugin.isProximityChatOn( ) )
         {
-            for (Player players: Bukkit.getOnlinePlayers()) {
-                messenger.sendMessage( players,"state.on" );
+            messenger.sendMessage( new ArrayList<>( Bukkit.getOnlinePlayers() ),"state.on" );
+            messenger.sendMessage(
+                    new ArrayList<>( Bukkit.getOnlinePlayers() ),
+                    "state.chatrange",
+                    new MsgEntry("<ChatRange>", config.getDouble( "chatRange") )
+            );
+            if ( config.getBoolean( "noiseEnabled") )
                 messenger.sendMessage(
-                        players,
-                        "state.range",
-                        new MsgEntry( "<ChatRange>", config.getDouble( "chatRange") )
+                        new ArrayList<>( Bukkit.getOnlinePlayers() ),
+                        "state.noiserange",
+                        new MsgEntry("<NoiseRange>", config.getDouble( "noiseRange") )
                 );
-            }
         }
         else {
-            for (Player players: Bukkit.getOnlinePlayers()) {
-                messenger.sendMessage( players,"state.off" );
-            }
+            messenger.sendMessage( new ArrayList<>( Bukkit.getOnlinePlayers() ),"state.off" );
         }
 
         // Command was used correctly.
