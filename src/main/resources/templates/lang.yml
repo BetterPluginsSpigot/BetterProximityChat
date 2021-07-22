@@ -1,20 +1,27 @@
-# PLAYER
+#    ______      _   _           ______              _           _ _         _____ _           _
+#    | ___ \    | | | |          | ___ \            (_)         (_) |       /  __ \ |         | |
+#    | |_/ / ___| |_| |_ ___ _ __| |_/ / __ _____  ___ _ __ ___  _| |_ _   _| /  \/ |__   __ _| |_
+#    | ___ \/ _ \ __| __/ _ \ '__|  __/ '__/ _ \ \/ / | '_ ` _ \| | __| | | | |   | '_ \ / _` | __|
+#    | |_/ /  __/ |_| ||  __/ |  | |  | | | (_) >  <| | | | | | | | |_| |_| | \__/\ | | | (_| | |_
+#    \____/ \___|\__|\__\___|_|  \_|  |_|  \___/_/\_\_|_| |_| |_|_|\__|\__, |\____/_| |_|\__,_|\__|
+
+# Welcome Message
 player.join: {player.join}
 
-# HELP
+# Help Command
 help.intro: {help.intro}
 help.toggle: {help.toggle}
 help.t: {help.toggle}
 help.reload: {help.reload}
 help.r: {help.reload}
 
-# PROXIMITY CHAT
+# Proximity Chat
 players.notfound: {players.notfound}
 players.found: {players.found}
 state.on: {state.on}
 state.off: {state.off}
 state.chatrange: {state.chatrange}
-state.noiserange: {state.noiserange}
+state.noise: {state.noise}
 
-# RELOAD
+# Reload Command
 reload.complete: {reload.complete}

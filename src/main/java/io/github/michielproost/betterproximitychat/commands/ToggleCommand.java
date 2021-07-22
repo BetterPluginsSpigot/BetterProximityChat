@@ -71,11 +71,7 @@ public class ToggleCommand extends PlayerBPCommand {
                     new MsgEntry("<ChatRange>", config.getDouble( "chatRange") )
             );
             if ( config.getBoolean( "noiseEnabled") )
-                messenger.sendMessage(
-                        new ArrayList<>( Bukkit.getOnlinePlayers() ),
-                        "state.noiserange",
-                        new MsgEntry("<NoiseRange>", config.getDouble( "noiseRange") )
-                );
+                messenger.sendMessage( new ArrayList<>( Bukkit.getOnlinePlayers() ), "state.noise" );
         }
         else {
             messenger.sendMessage( new ArrayList<>( Bukkit.getOnlinePlayers() ),"state.off" );

@@ -8,6 +8,10 @@ import java.util.Random;
  */
 public class MessageUtil {
 
+    // The numeric ranges of ASCII.
+    static final int ASCII_MAX = 127;
+    static final int ASCII_MIN = 32;
+
     /**
      * Add noise to a given message.
      * @param message The message.
@@ -52,8 +56,6 @@ public class MessageUtil {
      */
     public static char getRandomASCIICharacter()
     {
-        int ASCII_MAX = 127;
-        int ASCII_MIN = 32;
         Random random = new Random();
         int index = random.nextInt( ASCII_MAX - ASCII_MIN ) + ASCII_MIN;
         return (char) index;

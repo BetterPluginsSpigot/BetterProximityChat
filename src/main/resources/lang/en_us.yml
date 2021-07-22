@@ -9,6 +9,6 @@ players.found: "Your message has been send to <FoundPlayersAmount> players withi
 state.on: "Proximity chat is on."
 state.off: "Proximity chat is off."
 state.chatrange: "The proximity chat range is: <ChatRange>"
-state.noiserange: "Noise is enabled. Noise range is: <NoiseRange>"
+state.noise: "Noise is enabled."
 
 reload.complete: "Reload complete."

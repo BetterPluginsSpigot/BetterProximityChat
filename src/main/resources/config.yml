@@ -2,4 +2,3 @@ language: "en_us"
 welcomeMessage: true
 noiseEnabled: true
 chatRange: 50
-noiseRange: 50

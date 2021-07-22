@@ -56,14 +56,10 @@ public class EventListener implements Listener {
         messenger.sendMessage(
                 event.getPlayer(),
                 "state.chatrange",
-                new MsgEntry( "<ChatRange>", config.getDouble( "chatRange") )
+                new MsgEntry( "<ChatRange>", config.getDouble( "chatRange" ) )
         );
         if ( config.getBoolean( "noiseEnabled") )
-            messenger.sendMessage(
-                    event.getPlayer(),
-                    "state.noiserange",
-                    new MsgEntry("<NoiseRange>", config.getDouble( "noiseRange") )
-            );
+            messenger.sendMessage( event.getPlayer(), "state.noise" );
     }
 
     /**
@@ -83,9 +79,6 @@ public class EventListener implements Listener {
 
             // Get chat range.
             double chatRange = config.getDouble( "chatRange");
-
-            // Get noise range.
-            double noiseRange = config.getDouble( "noiseRange");
 
             // Send message to each nearby player.
             ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, chatRange );
@@ -107,7 +100,7 @@ public class EventListener implements Listener {
                         // Calculate distance.
                         double distance = sender.getLocation().distance( player.getLocation() );
                         // Calculate chance of error.
-                        double chanceError = distance / noiseRange;
+                        double chanceError = distance / chatRange;
                         // Generate new message based on noise.
                         String message = MessageUtil.addNoise( event.getMessage(), chanceError );
                         // Send generated message to nearby player.

@@ -9,6 +9,6 @@ players.found: "Je bericht is verzonden naar <FoundPlayersAmount> spelers binnen
 state.on: "Proximity chat staat aan."
 state.off: "Proximity chat staat af."
 state.chatrange: "Het proximity chat bereik is: <ChatRange>"
-state.noiserange: "Ruis staat aan. Het ruis bereik is: <NoiseRange>"
+state.noise: "Ruis staat aan."
 
 reload.complete: "Herladen voltooid."
