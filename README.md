@@ -1,4 +1,4 @@
-# BetterProximityChat
+# BetterProximityChat (47 downloads)
 Give a more realistic feel to your Minecraft server by only allowing players near each other to send messages to one another.
 
 ![banner](https://user-images.githubusercontent.com/37398740/126126830-565f1d63-f6ec-423f-9da0-bff15b1b24a7.png)
