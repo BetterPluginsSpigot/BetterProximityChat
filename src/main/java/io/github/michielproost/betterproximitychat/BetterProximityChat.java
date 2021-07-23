@@ -12,6 +12,7 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -79,6 +80,7 @@ public class BetterProximityChat extends JavaPlugin {
         // Get localisation.
         BetterLang localisation = new BetterLang("lang.yml", language + ".yml", this);
 
+        // Custom bStats.
         double chatRange = config.getDouble("chatRange");
         String chatRangeText;
         if (chatRange < 5)
@@ -90,6 +92,24 @@ public class BetterProximityChat extends JavaPlugin {
         else
             chatRangeText = "[50 - inf[";
         metrics.addCustomChart( new SimplePie("chatrange",()-> chatRangeText ) );
+
+        boolean noiseEnabled = config.getBoolean( "noiseEnabled" );
+        metrics.addCustomChart( new SimplePie("noiseenabled",()-> String.valueOf( noiseEnabled ) ) );
+
+        boolean welcomeMessage = config.getBoolean( "welcomeMessage" );
+        metrics.addCustomChart( new SimplePie("welcomemessage",()-> String.valueOf( welcomeMessage ) ) );
+
+        int noisePolynomialDegree = config.getInt( "noisePolynomialDegree" );
+        String noisePolynomialDegreeText;
+        if (chatRange < 5)
+            noisePolynomialDegreeText = "[0 - 5[";
+        else if (chatRange >= 5 && chatRange < 10)
+            noisePolynomialDegreeText = "[5 - 10[";
+        else if (chatRange >= 10 && chatRange < 15)
+            noisePolynomialDegreeText = "[10 - 15[";
+        else
+            noisePolynomialDegreeText = "[15 - 20]";
+        metrics.addCustomChart( new SimplePie("noisepolynomialdegree",()-> noisePolynomialDegreeText ) );
 
         // Create messenger.
         Messenger messenger =
@@ -116,6 +136,7 @@ public class BetterProximityChat extends JavaPlugin {
     @Override
     public void onDisable()
     {
+        HandlerList.unregisterAll( this );
         super.onDisable();
     }
 

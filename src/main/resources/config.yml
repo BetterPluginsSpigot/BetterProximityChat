@@ -1,3 +1,5 @@
 language: "en_us"
 welcomeMessage: true
+noiseEnabled: true
+noisePolynomialDegree: 6
 chatRange: 50

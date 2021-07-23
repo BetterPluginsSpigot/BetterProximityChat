@@ -8,6 +8,9 @@ players.notfound: "No players within range. Your message was dropped."
 players.found: "Your message has been send to <FoundPlayersAmount> players within range."
 state.on: "Proximity chat is on."
 state.off: "Proximity chat is off."
-state.range: "The proximity chat range is: <ChatRange>"
+state.chatrange: "The proximity chat range is: <ChatRange>"
+state.noise: "Noise is enabled."
 
 reload.complete: "Reload complete."
+
+permission.required: "You don't have permission to execute the following command: <Command>"
