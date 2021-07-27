@@ -14,6 +14,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Listens to events and acts accordingly.
@@ -45,21 +46,15 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event)
     {
-        // Display message based on given configuration.
+        // Display welcome message based on given configuration.
         if ( config.getBoolean( "welcomeMessage" ) )
             messenger.sendMessage(
                     event.getPlayer(),
                     "player.join",
                     new MsgEntry( "<PlayerName>", event.getPlayer().getDisplayName() )
             );
-        messenger.sendMessage( event.getPlayer(),"state.on" );
-        messenger.sendMessage(
-                event.getPlayer(),
-                "state.chatrange",
-                new MsgEntry( "<ChatRange>", config.getDouble( "chatRange" ) )
-        );
-        if ( config.getBoolean( "noiseEnabled") )
-            messenger.sendMessage( event.getPlayer(), "state.noise" );
+        // // Send plugin's state to player.
+        plugin.sendState( Collections.singletonList( event.getPlayer() ) );
     }
 
     /**
@@ -77,45 +72,19 @@ public class EventListener implements Listener {
             // Remove recipients from event.
             event.getRecipients().clear();
 
-            // Get chat range.
-            double chatRange = config.getDouble( "chatRange");
-
             // Send message to each nearby player.
-            ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, chatRange );
+            ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, config.getDouble( "chatRange" ) );
 
             // Other players are within range.
             if ( nearbyPlayers.size() > 0 ){
-                // Set new recipients.
-                event.getRecipients().addAll( nearbyPlayers );
-                // Set yourself.
+                // Only send original message to sender.
                 event.getRecipients().add( sender );
-                // Add noise?
-                if ( config.getBoolean( "noiseEnabled") )
-                {
-                    // Only send original message to sender.
-                    event.getRecipients().clear();
-                    event.getRecipients().add( sender );
-                    // For each within range.
-                    for (Player player: nearbyPlayers) {
-                        // Calculate distance.
-                        double distance = sender.getLocation().distance( player.getLocation() );
-                        // Get degree of noise polynomial.
-                        int degree = config.getInt("noisePolynomialDegree");
-                        // Limit degree.
-                        if (degree < 1)
-                            degree = 1;
-                        else if (degree > 20)
-                            degree = 20;
-                        // Calculate chance of error.
-                        double chanceError = distance / chatRange;
-                        chanceError = Math.pow( chanceError, degree );
-                        // Generate new message based on noise.
-                        String message = MessageUtil.addNoise( event.getMessage(), chanceError );
-                        // Add username to message.
-                        message = "<" + sender.getDisplayName() + "> " + message;
-                        // Send generated message to nearby player.
-                        player.sendMessage( message );
-                    }
+                // For each within range.
+                for (Player receiver: nearbyPlayers) {
+                    // Build ProximityChat message.
+                    String message = buildMessage( sender, receiver, event.getMessage() );
+                    // Send message to nearby player.
+                    receiver.sendMessage( message );
                 }
                 // Notify sender about amount of nearby players.
                 messenger.sendMessage(
@@ -128,6 +97,37 @@ public class EventListener implements Listener {
                 messenger.sendMessage( sender, "players.notfound" );
             }
         }
+    }
+
+    /**
+     * Build ProximityChat message.
+     * @param sender The sender of the message.
+     * @param receiver The receiver of the message.
+     * @param message The send message.
+     * @return The BetterProximityChat message.
+     */
+    public String buildMessage(Player sender, Player receiver, String message )
+    {
+        // Distance between sender & receiver.
+        double distance = sender.getLocation().distance( receiver.getLocation() );
+        // Noisy messages are enabled.
+        if ( config.getBoolean( "noiseEnabled") )
+        {
+            // Get degree of noise polynomial.
+            int degree = config.getInt( "noisePolynomialDegree" );
+            // Limit degree.
+            degree = Math.max( degree, 1 );
+            degree = Math.min( degree, 20 );
+            // Calculate chance of error.
+            double chanceError = distance / config.getDouble( "chatRange" );
+            chanceError = Math.pow( chanceError, degree );
+            // Generate new message based on noise.
+            message = MessageUtil.addNoise( message, chanceError );
+        }
+        // Add username to message.
+        message = "<" + sender.getDisplayName() + "> " + message;
+        // Add distance to message.
+        return "[ " + distance + "] " + message;
     }
 
     /**

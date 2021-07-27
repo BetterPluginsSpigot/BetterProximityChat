@@ -2,23 +2,24 @@ package io.github.michielproost.betterproximitychat;
 
 import be.betterplugins.core.messaging.logging.BPLogger;
 import be.betterplugins.core.messaging.messenger.Messenger;
+import be.betterplugins.core.messaging.messenger.MsgEntry;
 import be.dezijwegel.betteryaml.BetterLang;
 import be.dezijwegel.betteryaml.OptionalBetterYaml;
 import io.github.michielproost.betterproximitychat.commands.CommandHandler;
 import io.github.michielproost.betterproximitychat.events.EventListener;
 import io.github.michielproost.betterproximitychat.util.BStatsImplementation;
 import io.github.michielproost.betterproximitychat.util.UpdateChecker;
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.File;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 
@@ -33,6 +34,9 @@ public class BetterProximityChat extends JavaPlugin {
     // Proximity chat is on by default.
     boolean proximityChatOn = true;
 
+    private Messenger messenger;
+    private YamlConfiguration config;
+
     /**
      * Constructor required for MockBukkit.
      */
@@ -43,9 +47,9 @@ public class BetterProximityChat extends JavaPlugin {
     /**
      * Constructor required for MockBukkit.
      */
-    protected BetterProximityChat(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
+    protected BetterProximityChat( JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file )
     {
-        super(loader, description, dataFolder, file);
+        super( loader, description, dataFolder, file );
     }
 
     /**
@@ -64,13 +68,37 @@ public class BetterProximityChat extends JavaPlugin {
         return proximityChatOn;
     }
 
+    /**
+     * Send the plugin's state to the given players.
+     * @param players The receivers.
+     */
+    public void sendState( List<Player> players )
+    {
+        if ( this.isProximityChatOn( ) )
+        {
+            // Proximity chat is on.
+            messenger.sendMessage( players,"state.on" );
+            // The chat range is ...
+            messenger.sendMessage(
+                    players,
+                    "state.chatrange",
+                    new MsgEntry("<ChatRange>", config.getDouble( "chatRange") )
+            );
+            if ( config.getBoolean( "noiseEnabled" ) )
+                // Noisy messages are on.
+                messenger.sendMessage( players, "state.noise" );
+        }
+        else {
+            // Proximity chat is off.
+            messenger.sendMessage( players,"state.off" );
+        }
+    }
+
     @Override
     public void onEnable()
     {
-        super.onEnable();
-
         // Get configuration from BetterYaml.
-        OptionalBetterYaml optionalConfig = new OptionalBetterYaml("config.yml", this);
+        OptionalBetterYaml optionalConfig = new OptionalBetterYaml( "config.yml", this );
         Optional<YamlConfiguration> loadResult = optionalConfig.getYamlConfiguration();
 
         // Configuration is not found.
@@ -85,19 +113,19 @@ public class BetterProximityChat extends JavaPlugin {
         }
 
         // The configuration.
-        YamlConfiguration config = loadResult.get();
+        this.config = loadResult.get();
 
         // The language.
         String language = config.getString( "language" );
 
         // Get localisation.
-        BetterLang localisation = new BetterLang("lang.yml", language + ".yml", this);
+        BetterLang localisation = new BetterLang( "lang.yml", language + ".yml", this );
 
         // Create messenger.
-        Messenger messenger =
+        this.messenger =
                 new Messenger(
                         localisation.getMessages(),
-                        new BPLogger(Level.WARNING),
+                        new BPLogger( Level.WARNING ),
                         ChatColor.YELLOW + "[BPC] " + ChatColor.BLUE
                 );
 
@@ -116,14 +144,12 @@ public class BetterProximityChat extends JavaPlugin {
         // Start UpdateChecker in a separate thread to not completely block the server.
         Thread updateChecker = new UpdateChecker(this);
         updateChecker.start();
-
     }
 
     @Override
     public void onDisable()
     {
         HandlerList.unregisterAll( this );
-        super.onDisable();
     }
 
     /**

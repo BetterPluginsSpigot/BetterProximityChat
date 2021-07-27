@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Command: /bpc reload | r
- * Toggle between proximity chat on or off.
+ * Reloads the BetterProximityChat configuration files.
  * @author Michiel Proost
  */
 public class ReloadCommand extends PlayerBPCommand  {
@@ -24,8 +24,8 @@ public class ReloadCommand extends PlayerBPCommand  {
      * @param messenger The messenger.
      * @param plugin The BetterProximityChat plugin.
      */
-    public ReloadCommand(Messenger messenger, BetterProximityChat plugin) {
-        super(messenger);
+    public ReloadCommand( Messenger messenger, BetterProximityChat plugin ) {
+        super( messenger );
         this.plugin = plugin;
     }
 
@@ -48,7 +48,7 @@ public class ReloadCommand extends PlayerBPCommand  {
     }
 
     @Override
-    public boolean execute(@NotNull Player player, @NotNull Command command, @NotNull String[] strings)
+    public boolean execute( @NotNull Player player, @NotNull Command command, @NotNull String[] strings )
     {
         // Reload plugin.
         plugin.reload();
