@@ -5,6 +5,7 @@ import be.betterplugins.core.messaging.messenger.MsgEntry;
 import io.github.michielproost.betterproximitychat.BetterProximityChat;
 import io.github.michielproost.betterproximitychat.util.MessageUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -77,8 +78,10 @@ public class EventListener implements Listener {
 
             // Other players are within range.
             if ( nearbyPlayers.size() > 0 ){
-                // Only send original message to sender.
-                event.getRecipients().add( sender );
+                // Send message without distance to sender.
+                sender.sendMessage(
+                        ChatColor.YELLOW + "<" + sender.getDisplayName() + "> "
+                                + ChatColor.WHITE + event.getMessage() );
                 // For each within range.
                 for (Player receiver: nearbyPlayers) {
                     // Build ProximityChat message.
@@ -125,9 +128,9 @@ public class EventListener implements Listener {
             message = MessageUtil.addNoise( message, chanceError );
         }
         // Add username to message.
-        message = "<" + sender.getDisplayName() + "> " + message;
+        message = ChatColor.YELLOW + "<" + sender.getDisplayName() + "> " + ChatColor.WHITE + message;
         // Add distance to message.
-        return "[ " + distance + "] " + message;
+        return ChatColor.DARK_GREEN + "[" + String.format("%.1f", distance) + "] " + message;
     }
 
     /**
