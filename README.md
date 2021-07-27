@@ -1,4 +1,4 @@
-# BetterProximityChat (47 downloads)
+# BetterProximityChat (89 downloads)
 Give a more realistic feel to your Minecraft server by only allowing players near each other to send messages to one another.
 
 ![banner](https://user-images.githubusercontent.com/37398740/126126830-565f1d63-f6ec-423f-9da0-bff15b1b24a7.png)
@@ -28,4 +28,5 @@ Personalize your experience by ...
 | ------------- |:-------------:| 
 | [V1.0.0](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.0)    | Initial version | 
 | [V1.0.1](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.1)    | Reload command + Version check | 
-| [V1.0.2](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.2)    | New feature: Noisy Messages + Fixed Error in Reload Command | 
+| [V1.0.2](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.2)    | New feature: Noisy Messages + Fixed Error in Reload Command |
+| [V1.0.2](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.3)    | Reformated Proximity Chat Messsages |
