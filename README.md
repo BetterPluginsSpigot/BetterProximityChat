@@ -29,4 +29,4 @@ Personalize your experience by ...
 | [V1.0.0](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.0)    | Initial version | 
 | [V1.0.1](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.1)    | Reload command + Version check | 
 | [V1.0.2](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.2)    | New feature: Noisy Messages + Fixed Error in Reload Command |
-| [V1.0.2](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.3)    | Reformated Proximity Chat Messsages |
+| [V1.0.3](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.3)    | Reformated Proximity Chat Messsages |

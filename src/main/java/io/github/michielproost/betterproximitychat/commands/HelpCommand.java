@@ -10,22 +10,23 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 /**
- * Command: /br help | h
+ * Command: /bpc help | h
  * Displays manual for BetterProximityChat commands.
  * @author Michiel Proost
  */
 public class HelpCommand extends PlayerBPCommand {
 
+    // Map every command to its name.
     private final Set<PlayerBPCommand> commandSet;
 
     /**
      * Displays manual for BetterProximityChat commands.
      * @param messenger The messenger.
      */
-    public HelpCommand(Messenger messenger, Map<String, PlayerBPCommand> commands )
+    public HelpCommand( Messenger messenger, Map<String, PlayerBPCommand> commands )
     {
         // Initialize messenger.
-        super(messenger);
+        super( messenger );
         // Set of BetterProximityChat commands.
         this.commandSet = new HashSet<>( commands.values() );
     }
@@ -58,7 +59,7 @@ public class HelpCommand extends PlayerBPCommand {
                 new MsgEntry( "<PlayerName>", player.getDisplayName() )
         );
         // Display explanation of every command.
-        for (PlayerBPCommand cmd: commandSet){
+        for ( PlayerBPCommand cmd: commandSet ){
             messenger.sendMessage(
                     player,
                     "help." + cmd.getCommandName(),
