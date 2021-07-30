@@ -1,7 +1,7 @@
 name: BetterProximityChat
 author: MichielProost
 main: io.github.michielproost.betterproximitychat.BetterProximityChat
-version: 1.0.3
+version: 1.0.4
 commands:
   betterproximitychat:
     description: BetterProximityChat commands
@@ -17,9 +17,12 @@ permissions:
       betterproximitychat.help: true
       betterproximitychat.toggle: true
       betterproximitychat.reload: true
+      betterproximitychat.sound: true
   betterproximitychat.help:
     default: true
   betterproximitychat.toggle:
     default: op
   betterproximitychat.reload:
     default: op
+  betterproximitychat.sound:
+    default: true

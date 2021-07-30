@@ -4,4 +4,4 @@ noiseEnabled: true
 noisePolynomialDegree: 6
 chatRange: 50
 soundsEnabled: true
-receivingSound: CAMPFIRE_CRACKLE
+receivingSound: ENTITY_CHICKEN_EGG

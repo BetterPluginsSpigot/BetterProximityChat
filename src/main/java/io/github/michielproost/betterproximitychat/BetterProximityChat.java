@@ -7,6 +7,7 @@ import be.dezijwegel.betteryaml.BetterLang;
 import be.dezijwegel.betteryaml.OptionalBetterYaml;
 import io.github.michielproost.betterproximitychat.commands.CommandHandler;
 import io.github.michielproost.betterproximitychat.events.EventListener;
+import io.github.michielproost.betterproximitychat.events.SoundGUI;
 import io.github.michielproost.betterproximitychat.util.BStatsImplementation;
 import io.github.michielproost.betterproximitychat.util.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -133,8 +134,12 @@ public class BetterProximityChat extends JavaPlugin {
         EventListener eventListener = new EventListener( messenger, config, this );
         this.getServer().getPluginManager().registerEvents( eventListener, this );
 
+        // Register sound GUI.
+        SoundGUI soundGUI = new SoundGUI();
+        this.getServer().getPluginManager().registerEvents( soundGUI, this );
+
         // Register commands.
-        CommandHandler commandHandler = new CommandHandler( messenger, this, config );
+        CommandHandler commandHandler = new CommandHandler( messenger, this, soundGUI );
         this.getCommand("betterproximitychat").setExecutor( commandHandler );
 
         // Implement bStats.
