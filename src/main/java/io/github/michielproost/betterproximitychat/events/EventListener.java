@@ -6,6 +6,7 @@ import io.github.michielproost.betterproximitychat.BetterProximityChat;
 import io.github.michielproost.betterproximitychat.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -88,6 +89,16 @@ public class EventListener implements Listener {
                     String message = buildMessage( sender, receiver, event.getMessage() );
                     // Send message to nearby player.
                     receiver.sendMessage( message );
+                    if ( config.getBoolean( "soundsEnabled" ) ){
+                        String receivingSound = config.getString( "receivingSound" );
+                        try {
+                            // Play chosen "message received" sound.
+                            receiver.playSound( receiver.getLocation(), Sound.valueOf( receivingSound ), 1.0F, 1.0F );
+                        } catch ( IllegalArgumentException exception ){
+                            // Play default "message received" sound.
+                            receiver.playSound( receiver.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1.0F, 1.0F );
+                        }
+                    }
                 }
                 // Notify sender about amount of nearby players.
                 messenger.sendMessage(

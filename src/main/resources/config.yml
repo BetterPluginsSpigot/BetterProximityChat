@@ -3,3 +3,5 @@ welcomeMessage: true
 noiseEnabled: true
 noisePolynomialDegree: 6
 chatRange: 50
+soundsEnabled: true
+receivingSound: CAMPFIRE_CRACKLE

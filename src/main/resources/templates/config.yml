@@ -26,3 +26,12 @@ noisePolynomialDegree: {noisePolynomialDegree}
 
 # The maximum range between players in order to receive text messages from each other.
 chatRange: {chatRange}
+
+# If turned on:
+# A sound will be played when sending or receiving a message in proximity chat.
+soundsEnabled: {soundsEnabled}
+
+# The sound that is played when you receive a message:
+# Options can be found here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+# If not recognized, a default sound will be used.
+receivingSound: {receivingSound}
