@@ -47,8 +47,9 @@ public class SoundGUI implements Listener {
     /**
      * Create the preset inventory along with its items.
      * @param plugin The BetterProximityChat plugin.
+     * @param language The required language.
      */
-    public SoundGUI( BetterProximityChat plugin )
+    public SoundGUI( BetterProximityChat plugin, String language )
     {
         this.plugin = plugin;
 
@@ -56,15 +57,32 @@ public class SoundGUI implements Listener {
         inventory = Bukkit.createInventory( null, 9, "soundGUI" );
 
         // Initialize the inventory with preset sounds & return map.
-        soundMap = initializeSounds();
+        soundMap = initializeSounds( language );
     }
 
     /**
      * Place all the possible, preset, sounds in the inventory.
      * Return map linking every item's name to its appropriate sound.
+     * @param language The required language.
      */
-    public HashMap<String, Sound> initializeSounds()
+    public HashMap<String, Sound> initializeSounds( String language )
     {
+        String[] lore;
+        if ( language.equals("en_us") ) {
+            lore = new String[]{
+                    "-------------------------------",
+                    "   Click on the icon to make   ",
+                    " your new notification sound.  ",
+                    "-------------------------------"
+            };
+        } else {
+            lore = new String[]{
+                    "------------------------------------",
+                    "    Klik op het pictogram om dit    ",
+                    " uw nieuwe meldingsgeluid te maken. ",
+                    "------------------------------------"
+            };
+        }
         HashMap<String, Sound> soundMap = new HashMap<>();
         for (int i = 0; i < inventory.getSize(); i++)
         {
@@ -72,11 +90,7 @@ public class SoundGUI implements Listener {
             inventory.addItem(
               createGuiItem(
                     materials[i], names[i],
-                      "----------------------------",
-                      "Click on the icon to make",
-                      ChatColor.YELLOW + names[i],
-                      "your new notification sound.",
-                      "----------------------------"
+                      lore[0], lore[1], ChatColor.YELLOW + names[i], lore[2], lore[3]
               )
             );
             soundMap.put( names[i], sounds[i] );

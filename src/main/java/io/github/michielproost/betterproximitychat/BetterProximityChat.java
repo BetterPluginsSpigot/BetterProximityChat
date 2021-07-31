@@ -160,7 +160,7 @@ public class BetterProximityChat extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents( eventListener, this );
 
         // Register sound GUI.
-        SoundGUI soundGUI = new SoundGUI( this );
+        SoundGUI soundGUI = new SoundGUI( this, language );
         this.getServer().getPluginManager().registerEvents( soundGUI, this );
 
         // Register commands.

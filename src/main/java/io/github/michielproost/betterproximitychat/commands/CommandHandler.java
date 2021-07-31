@@ -93,12 +93,13 @@ public class CommandHandler implements CommandExecutor {
         }
         else
         {
-            // Unrecognized command.
-            messenger.sendMessage(
-                sender,
-                "command.unrecognized",
-                new MsgEntry( "<Command>", "/bpc " + commandName )
-            );
+            if ( commandName != "help" )
+                // Unrecognized command.
+                messenger.sendMessage(
+                    sender,
+                    "command.unrecognized",
+                    new MsgEntry( "<Command>", "/bpc " + commandName )
+                );
             // Execute help command.
             return helpCommand.execute( sender, cmd, args );
         }
