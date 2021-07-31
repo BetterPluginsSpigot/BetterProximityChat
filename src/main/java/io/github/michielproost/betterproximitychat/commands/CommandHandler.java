@@ -8,8 +8,6 @@ import io.github.michielproost.betterproximitychat.events.SoundGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -21,31 +19,28 @@ import java.util.Map;
  */
 public class CommandHandler implements CommandExecutor {
 
-    // The messenger.
-    private final Messenger messenger;
     // Map every command to its name.
     private final Map<String, PlayerBPCommand> commands;
-    // Help command.
+
     private final HelpCommand helpCommand;
+    private final Messenger messenger;
 
     /**
      * Create a CommandHandler.
      * @param messenger The messenger.
      * @param plugin The BetterProximityChat plugin.
-     * @parm soundGUI The sound GUI.
+     * @param soundGUI The sound GUI.
      */
-    public CommandHandler(Messenger messenger,
-                          BetterProximityChat plugin,
-                          SoundGUI soundGUI )
+    public CommandHandler( Messenger messenger,
+                           BetterProximityChat plugin,
+                           SoundGUI soundGUI )
     {
         // Initialize the messenger.
         this.messenger = messenger;
 
-        // Toggle command.
+        // The command set.
         PlayerBPCommand toggle = new ToggleCommand( messenger, plugin );
-        // Reload command.
         PlayerBPCommand reload = new ReloadCommand( messenger, plugin );
-        // Sound command.
         PlayerBPCommand sound = new SoundCommand( messenger, soundGUI );
 
         // Create map.
@@ -73,10 +68,10 @@ public class CommandHandler implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender,
-                             @NotNull Command cmd,
-                             @NotNull String label,
-                             String[] args)
+    public boolean onCommand( @NotNull CommandSender sender,
+                              @NotNull Command cmd,
+                              @NotNull String label,
+                              String[] args )
     {
         // Get name of desired command.
         String commandName = args.length == 0 ? "help" : args[0].toLowerCase();
@@ -98,6 +93,12 @@ public class CommandHandler implements CommandExecutor {
         }
         else
         {
+            // Unrecognized command.
+            messenger.sendMessage(
+                sender,
+                "command.unrecognized",
+                new MsgEntry( "<Command>", "/bpc " + commandName )
+            );
             // Execute help command.
             return helpCommand.execute( sender, cmd, args );
         }

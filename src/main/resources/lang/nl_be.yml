@@ -3,6 +3,7 @@ player.join: "Welkom bij BetterProximityChat, een server waarop je alleen kunt c
 help.intro: "Welkom bij BetterProximityChat <PlayerName>! Je vind een lijst van alle mogelijke commando's beneden."
 help.toggle: "<Command>: Schakel proximity chat aan of uit."
 help.reload: "<Command>: Herlaad BetterProximityChat configuratie bestanden."
+help.sound: "<Command>: Kies een meldingsgeluid bij het ontvangen van berichten in proximity chat."
 
 players.notfound: "Geen spelers binnen bereik. Je bericht is verwijderd."
 players.found: "Je bericht is verzonden naar <FoundPlayersAmount> spelers binnen bereik."
@@ -10,6 +11,8 @@ state.on: "Proximity chat staat aan."
 state.off: "Proximity chat staat af."
 state.chatrange: "Het proximity chat bereik is: <ChatRange>"
 state.noise: "Ruis staat aan."
+
+command.unrecognized: "Het gegeven commando is niet geldig: <CommandName>."
 
 reload.complete: "Herladen voltooid."
 

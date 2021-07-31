@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Command: /bpc sound | s
- * Opens the sound GUI in which the player can choose their desired "received message" sound.
+ * Opens a menu in which players can choose their desired notification sound.
  * @author Michiel Proost
  */
 public class SoundCommand extends PlayerBPCommand {
@@ -20,7 +20,7 @@ public class SoundCommand extends PlayerBPCommand {
     private final SoundGUI soundGUI;
 
     /**
-     * Opens the sound GUI in which the player can choose their desired "received message" sound.
+     * Opens a menu in which players can choose their desired notification sound.
      * @param messenger The messenger.
      * @param soundGUI The sound GUI.
      */
