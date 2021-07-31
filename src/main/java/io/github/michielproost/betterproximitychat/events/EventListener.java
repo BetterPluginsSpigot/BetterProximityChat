@@ -34,7 +34,7 @@ public class EventListener implements Listener {
      * @param messenger The messenger.
      * @param plugin The BetterProximityChat plugin.
      */
-    public EventListener(Messenger messenger, YamlConfiguration config, BetterProximityChat plugin)
+    public EventListener( Messenger messenger, YamlConfiguration config, BetterProximityChat plugin )
     {
         this.messenger = messenger;
         this.config = config;
@@ -42,13 +42,13 @@ public class EventListener implements Listener {
     }
 
     /**
-     * Show welcoming message to every player that joins the server.
+     * Show welcome message to every player that joins the server.
      * @param event The event.
      */
     @EventHandler
-    public void onPlayerJoin(final PlayerJoinEvent event)
+    public void onPlayerJoin( final PlayerJoinEvent event )
     {
-        // Display welcome message based on given configuration.
+        // Display welcome message based on configuration.
         if ( config.getBoolean( "welcomeMessage" ) )
             messenger.sendMessage(
                     event.getPlayer(),
@@ -66,7 +66,7 @@ public class EventListener implements Listener {
      * @param event The event.
      */
     @EventHandler( priority = EventPriority.HIGHEST )
-    public void onPlayerChat( AsyncPlayerChatEvent event )
+    public void onPlayerChat( final AsyncPlayerChatEvent event )
     {
         if ( plugin.isProximityChatOn() )
         {
@@ -76,7 +76,7 @@ public class EventListener implements Listener {
             // Remove recipients from event.
             event.getRecipients().clear();
 
-            // Send message to each nearby player.
+            // Get nearby players (within radius around character).
             ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, config.getDouble( "chatRange" ) );
 
             // Other players are within range.

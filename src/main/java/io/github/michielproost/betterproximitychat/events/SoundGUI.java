@@ -19,23 +19,24 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * A GUI in which every player can choose their desired "received message" sound.
+ * A GUI in which every player can choose their desired notification sound.
  * @author Michiel Proost
  */
 public class SoundGUI implements Listener {
     
     private static final Material[] materials = {
-            Material.EGG, Material.SAND, Material.GLASS, Material.CHICKEN, Material.CAT_SPAWN_EGG,
-            Material.CREEPER_HEAD, Material.BROWN_MUSHROOM, Material.SLIME_BLOCK, Material.SNOW
+            Material.EGG, Material.SNOWBALL, Material.COOKED_CHICKEN, Material.CAT_SPAWN_EGG,
+            Material.CREEPER_HEAD, Material.BROWN_MUSHROOM, Material.SLIME_BLOCK, Material.NOTE_BLOCK,
+            Material.BEE_NEST
     };
     private static final String[] names = {
-            "Chicken Egg", "Sand Fall", "Glass Fall", "Chicken Hurt", "Cat Purr", "Creeper Hurt",
-            "Mushroom Eat", "Slime Squish", "Snowball Throw"
+            "Chicken Egg", "Snowball Throw", "Chicken Hurt", "Cat Purr", "Creeper Hurt",
+            "Mushroom Eat", "Slime Squish", "Note Bell", "Bee Sting"
     };
     private static final Sound[] sounds = {
-            Sound.ENTITY_CHICKEN_EGG, Sound.BLOCK_SAND_FALL, Sound.BLOCK_GLASS_FALL, Sound.ENTITY_CHICKEN_HURT,
-            Sound.ENTITY_CAT_PURR, Sound.ENTITY_CREEPER_HURT, Sound.ENTITY_MOOSHROOM_EAT, Sound.ENTITY_SLIME_SQUISH,
-            Sound.ENTITY_SNOWBALL_THROW
+            Sound.ENTITY_CHICKEN_EGG, Sound.ENTITY_SNOWBALL_THROW, Sound.ENTITY_CHICKEN_HURT,
+            Sound.ENTITY_CAT_PURR, Sound.ENTITY_CREEPER_HURT, Sound.ENTITY_MOOSHROOM_EAT,
+            Sound.ENTITY_SLIME_SQUISH, Sound.BLOCK_NOTE_BLOCK_BELL, Sound.ENTITY_BEE_STING
     };
 
     private final Inventory inventory;
@@ -71,9 +72,11 @@ public class SoundGUI implements Listener {
             inventory.addItem(
               createGuiItem(
                     materials[i], names[i],
-                      "Click on the icon to make - "
-                              + ChatColor.BLUE + names[i] + ChatColor.DARK_AQUA +
-                              " - your new notification sound."
+                      "----------------------------",
+                      "Click on the icon to make",
+                      ChatColor.YELLOW + names[i],
+                      "your new notification sound.",
+                      "----------------------------"
               )
             );
             soundMap.put( names[i], sounds[i] );
