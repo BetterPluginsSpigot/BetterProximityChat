@@ -2,6 +2,7 @@ name: BetterProximityChat
 author: MichielProost
 main: io.github.michielproost.betterproximitychat.BetterProximityChat
 version: 1.0.4
+api-version: 1.16
 commands:
   betterproximitychat:
     description: BetterProximityChat commands

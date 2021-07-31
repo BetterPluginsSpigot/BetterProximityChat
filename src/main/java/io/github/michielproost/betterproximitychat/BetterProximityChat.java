@@ -12,6 +12,7 @@ import io.github.michielproost.betterproximitychat.util.BStatsImplementation;
 import io.github.michielproost.betterproximitychat.util.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -20,8 +21,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.logging.Level;
 
 /**
@@ -34,6 +37,8 @@ public class BetterProximityChat extends JavaPlugin {
 
     // Proximity chat is on by default.
     boolean proximityChatOn = true;
+    // Keep track of the notification sound of every player.
+    HashMap<UUID, Sound> playerSoundMap = new HashMap<>();
 
     private Messenger messenger;
     private YamlConfiguration config;
@@ -95,6 +100,26 @@ public class BetterProximityChat extends JavaPlugin {
         }
     }
 
+    /**
+     * Set the given player's notification sound.
+     * @param player The player.
+     * @param sound The desired notification sound.
+     */
+    public void setPlayerSound( Player player, Sound sound )
+    {
+        playerSoundMap.put( player.getUniqueId(), sound );
+    }
+
+    /**
+     * Get a given player's notification sound.
+     * @param player The player.
+     * @return The appropriate notification sound.
+     */
+    public Sound getNotificationSound( Player player )
+    {
+        return playerSoundMap.get( player.getUniqueId() );
+    }
+
     @Override
     public void onEnable()
     {
@@ -135,7 +160,7 @@ public class BetterProximityChat extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents( eventListener, this );
 
         // Register sound GUI.
-        SoundGUI soundGUI = new SoundGUI();
+        SoundGUI soundGUI = new SoundGUI( this );
         this.getServer().getPluginManager().registerEvents( soundGUI, this );
 
         // Register commands.

@@ -1,7 +1,10 @@
 package io.github.michielproost.betterproximitychat.events;
 
+import io.github.michielproost.betterproximitychat.BetterProximityChat;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,39 +16,69 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * A GUI in which every player can choose their desired "received message" sound.
  * @author Michiel Proost
  */
 public class SoundGUI implements Listener {
+    
+    private static final Material[] materials = {
+            Material.EGG, Material.SAND, Material.GLASS, Material.CHICKEN, Material.CAT_SPAWN_EGG,
+            Material.CREEPER_HEAD, Material.BROWN_MUSHROOM, Material.SLIME_BLOCK, Material.SNOW
+    };
+    private static final String[] names = {
+            "Chicken Egg", "Sand Fall", "Glass Fall", "Chicken Hurt", "Cat Purr", "Creeper Hurt",
+            "Mushroom Eat", "Slime Squish", "Snowball Throw"
+    };
+    private static final Sound[] sounds = {
+            Sound.ENTITY_CHICKEN_EGG, Sound.BLOCK_SAND_FALL, Sound.BLOCK_GLASS_FALL, Sound.ENTITY_CHICKEN_HURT,
+            Sound.ENTITY_CAT_PURR, Sound.ENTITY_CREEPER_HURT, Sound.ENTITY_MOOSHROOM_EAT, Sound.ENTITY_SLIME_SQUISH,
+            Sound.ENTITY_SNOWBALL_THROW
+    };
 
     private final Inventory inventory;
+    private final HashMap<String, Sound> soundMap;
+
+    private final BetterProximityChat plugin;
 
     /**
      * Create the preset inventory along with its items.
+     * @param plugin The BetterProximityChat plugin.
      */
-    public SoundGUI()
+    public SoundGUI( BetterProximityChat plugin )
     {
+        this.plugin = plugin;
+
         // New inventory with no owner and size nine.
         inventory = Bukkit.createInventory( null, 9, "soundGUI" );
 
-        // Initialize the inventory with preset sounds.
-        initializeSounds();
+        // Initialize the inventory with preset sounds & return map.
+        soundMap = initializeSounds();
     }
 
     /**
      * Place all the possible, preset, sounds in the inventory.
+     * Return map linking every item's name to its appropriate sound.
      */
-    public void initializeSounds()
+    public HashMap<String, Sound> initializeSounds()
     {
-        inventory.addItem(
-                createGuiItem(
-                    Material.EGG ,
-                    "Chicken Egg",
-                        "Click on item to make this your receiving sound."
-                )
-        );
+        HashMap<String, Sound> soundMap = new HashMap<>();
+        for (int i = 0; i < inventory.getSize(); i++)
+        {
+            // Add item to inventory.
+            inventory.addItem(
+              createGuiItem(
+                    materials[i], names[i],
+                      "Click on the icon to make - "
+                              + ChatColor.BLUE + names[i] + ChatColor.DARK_AQUA +
+                              " - your new notification sound."
+              )
+            );
+            soundMap.put( names[i], sounds[i] );
+        }
+        return soundMap;
     }
 
     /**
@@ -80,7 +113,10 @@ public class SoundGUI implements Listener {
         entity.openInventory( inventory );
     }
 
-
+    /**
+     * When a player selects a sound in the GUI.
+     * @param event The event.
+     */
     @EventHandler
     public void onInventoryClick( final InventoryClickEvent event )
     {
@@ -95,11 +131,18 @@ public class SoundGUI implements Listener {
             return;
         // Get player that clicked on the item.
         final Player player = (Player) event.getWhoClicked();
-        // Verify that correct item is clicked.
-        player.sendMessage( "Your new receiving sound is:" + clickedItem.getItemMeta().getDisplayName() );
+        // Get the item's display name.
+        String clickedItemName = clickedItem.getItemMeta().getDisplayName();
+        // Set player's new notification sound.
+        plugin.setPlayerSound( player, soundMap.get( clickedItemName ) );
+        // Play sound to player.
+        player.playSound( player.getLocation(), soundMap.get( clickedItemName ), 1.0F, 1.0F );
     }
 
-    // Cancel dragging in inventory.
+    /**
+     * Cancel dragging in the sound GUI.
+     * @param event The event.
+     */
     @EventHandler
     public void onInventoryDrag( final InventoryDragEvent event )
     {

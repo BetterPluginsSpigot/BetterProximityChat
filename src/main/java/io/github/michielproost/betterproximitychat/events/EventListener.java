@@ -55,8 +55,10 @@ public class EventListener implements Listener {
                     "player.join",
                     new MsgEntry( "<PlayerName>", event.getPlayer().getDisplayName() )
             );
-        // // Send plugin's state to player.
+        // Send plugin's state to player.
         plugin.sendState( Collections.singletonList( event.getPlayer() ) );
+        // Set new player's notification sound.
+        plugin.setPlayerSound( event.getPlayer(), Sound.ENTITY_CHICKEN_EGG );
     }
 
     /**
@@ -90,14 +92,9 @@ public class EventListener implements Listener {
                     // Send message to nearby player.
                     receiver.sendMessage( message );
                     if ( config.getBoolean( "soundsEnabled" ) ){
-                        String receivingSound = config.getString( "receivingSound" );
-                        try {
-                            // Play chosen "message received" sound.
-                            receiver.playSound( receiver.getLocation(), Sound.valueOf( receivingSound ), 1.0F, 1.0F );
-                        } catch ( IllegalArgumentException exception ){
-                            // Play default "message received" sound.
-                            receiver.playSound( receiver.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1.0F, 1.0F );
-                        }
+                        Sound notificationSound = plugin.getNotificationSound( receiver );
+                        // Get player's notification sound.
+                        receiver.playSound( receiver.getLocation(), notificationSound, 1.0F, 1.0F );
                     }
                 }
                 // Notify sender about amount of nearby players.

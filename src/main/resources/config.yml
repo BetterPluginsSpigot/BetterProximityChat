@@ -4,4 +4,3 @@ noiseEnabled: true
 noisePolynomialDegree: 6
 chatRange: 50
 soundsEnabled: true
-receivingSound: ENTITY_CHICKEN_EGG
