@@ -28,5 +28,5 @@ noisePolynomialDegree: {noisePolynomialDegree}
 chatRange: {chatRange}
 
 # If turned on:
-# A sound will be played when sending or receiving a message in proximity chat.
+# A sound will be played when receiving a message in proximity chat.
 soundsEnabled: {soundsEnabled}

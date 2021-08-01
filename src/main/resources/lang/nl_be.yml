@@ -12,7 +12,7 @@ state.off: "Proximity chat staat af."
 state.chatrange: "Het proximity chat bereik is: <ChatRange>"
 state.noise: "Ruis staat aan."
 
-command.unrecognized: "Het gegeven commando is niet geldig: <CommandName>."
+command.unrecognized: "Het gegeven commando is niet geldig: <Command>."
 
 reload.complete: "Herladen voltooid."
 

@@ -12,7 +12,7 @@ state.off: "Proximity chat is off."
 state.chatrange: "The proximity chat range is: <ChatRange>"
 state.noise: "Noise is enabled."
 
-command.unrecognized: "The given command is not valid: <CommandName>."
+command.unrecognized: "The given command is not valid: <Command>."
 
 reload.complete: "Reload complete."
 

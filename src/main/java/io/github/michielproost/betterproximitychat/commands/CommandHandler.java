@@ -93,7 +93,7 @@ public class CommandHandler implements CommandExecutor {
         }
         else
         {
-            if ( commandName != "help" )
+            if (!commandName.equals("help"))
                 // Unrecognized command.
                 messenger.sendMessage(
                     sender,

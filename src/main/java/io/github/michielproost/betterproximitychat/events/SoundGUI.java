@@ -70,17 +70,13 @@ public class SoundGUI implements Listener {
         String[] lore;
         if ( language.equals("en_us") ) {
             lore = new String[]{
-                    "-------------------------------",
                     "   Click on the icon to make   ",
-                    " your new notification sound.  ",
-                    "-------------------------------"
+                    " your new notification sound.  "
             };
         } else {
             lore = new String[]{
-                    "------------------------------------",
                     "    Klik op het pictogram om dit    ",
-                    " uw nieuwe meldingsgeluid te maken. ",
-                    "------------------------------------"
+                    " uw nieuwe meldingsgeluid te maken. "
             };
         }
         HashMap<String, Sound> soundMap = new HashMap<>();
@@ -90,7 +86,9 @@ public class SoundGUI implements Listener {
             inventory.addItem(
               createGuiItem(
                     materials[i], names[i],
-                      lore[0], lore[1], ChatColor.YELLOW + names[i], lore[2], lore[3]
+                      lore[0],
+                      ChatColor.YELLOW + " --> " + names[i],
+                      lore[1]
               )
             );
             soundMap.put( names[i], sounds[i] );
