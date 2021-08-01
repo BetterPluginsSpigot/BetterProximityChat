@@ -26,3 +26,7 @@ noisePolynomialDegree: {noisePolynomialDegree}
 
 # The maximum range between players in order to receive text messages from each other.
 chatRange: {chatRange}
+
+# If turned on:
+# A sound will be played when receiving a message in proximity chat.
+soundsEnabled: {soundsEnabled}

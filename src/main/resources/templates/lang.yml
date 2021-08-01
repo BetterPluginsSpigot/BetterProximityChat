@@ -14,6 +14,8 @@ help.toggle: {help.toggle}
 help.t: {help.toggle}
 help.reload: {help.reload}
 help.r: {help.reload}
+help.sound: {help.sound}
+help.s: {help.sound}
 
 # Proximity Chat
 players.notfound: {players.notfound}
@@ -22,6 +24,9 @@ state.on: {state.on}
 state.off: {state.off}
 state.chatrange: {state.chatrange}
 state.noise: {state.noise}
+
+# Command Unrecognized
+command.unrecognized: {command.unrecognized}
 
 # Reload Command
 reload.complete: {reload.complete}

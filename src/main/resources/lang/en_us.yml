@@ -3,6 +3,7 @@ player.join: "Welcome to BetterProximityChat, a server in which you are only abl
 help.intro: "Welcome to BetterProximityChat <PlayerName>! You can find a list of all available commands down below."
 help.toggle: "<Command>: Toggle between proximity chat on or off."
 help.reload: "<Command>: Reload BetterProximityChat configuration files."
+help.sound: "<Command>: Choose a notification sound when receiving messages in proximity chat."
 
 players.notfound: "No players within range. Your message was dropped."
 players.found: "Your message has been send to <FoundPlayersAmount> players within range."
@@ -10,6 +11,8 @@ state.on: "Proximity chat is on."
 state.off: "Proximity chat is off."
 state.chatrange: "The proximity chat range is: <ChatRange>"
 state.noise: "Noise is enabled."
+
+command.unrecognized: "The given command is not valid: <Command>."
 
 reload.complete: "Reload complete."
 

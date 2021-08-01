@@ -1,4 +1,4 @@
-# BetterProximityChat (89 downloads)
+# BetterProximityChat (143 downloads)
 Give a more realistic feel to your Minecraft server by only allowing players near each other to send messages to one another.
 
 ![banner](https://user-images.githubusercontent.com/37398740/126126830-565f1d63-f6ec-423f-9da0-bff15b1b24a7.png)
@@ -12,6 +12,13 @@ Personalize your experience by ...
 - Turning noise on or off
 - Setting the degree of the polynomial function used for noise calculation. The higher the degree, the lower the impact
 
+## New Feature (v1.0.4):
+You will now hear a notification sound when receiving a message in proximity chat.
+
+Personalize your experience by ...
+- Turning notification sounds on or off by setting the property soundsEnabled in the configuration file to false or true
+- Choosing your desired notification sound in a menu which you can open with the new command: /bpc sound
+
 ## Commands
 - `/bpc help`
   - Shows an explanation of the commands
@@ -22,6 +29,9 @@ Personalize your experience by ...
 - `/bpc reload` or `/bpc r`
   - Reloads the plugin's configuration files.
   - `betterproximitychat.reload`
+- `/bpc sound` or `/bpc s`
+  - Opens a menu in which you can choose a notification sound.
+  - `betterproximitychat.sound`
 
 ## BetterProximityChat versions with key upgrades
 | BetterProximityChat Version        | Key upgrades           | 
@@ -30,3 +40,4 @@ Personalize your experience by ...
 | [V1.0.1](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.1)    | Reload command + Version check | 
 | [V1.0.2](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.2)    | New feature: Noisy Messages + Fixed Error in Reload Command |
 | [V1.0.3](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.3)    | Reformated Proximity Chat Messsages |
+| [V1.0.4](https://github.com/BetterPluginsSpigot/BetterProximityChat/tree/v1.0.4)    | New feature: Notification Sounds |

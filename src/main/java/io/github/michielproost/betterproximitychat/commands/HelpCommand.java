@@ -50,7 +50,7 @@ public class HelpCommand extends PlayerBPCommand {
     }
 
     @Override
-    public boolean execute(@NotNull Player player, @NotNull Command command, @NotNull String[] strings)
+    public boolean execute( @NotNull Player player, @NotNull Command command, @NotNull String[] strings )
     {
         // Display intro.
         messenger.sendMessage(

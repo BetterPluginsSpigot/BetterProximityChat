@@ -6,6 +6,7 @@ import io.github.michielproost.betterproximitychat.BetterProximityChat;
 import io.github.michielproost.betterproximitychat.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,7 +34,7 @@ public class EventListener implements Listener {
      * @param messenger The messenger.
      * @param plugin The BetterProximityChat plugin.
      */
-    public EventListener(Messenger messenger, YamlConfiguration config, BetterProximityChat plugin)
+    public EventListener( Messenger messenger, YamlConfiguration config, BetterProximityChat plugin )
     {
         this.messenger = messenger;
         this.config = config;
@@ -41,21 +42,23 @@ public class EventListener implements Listener {
     }
 
     /**
-     * Show welcoming message to every player that joins the server.
+     * Show welcome message to every player that joins the server.
      * @param event The event.
      */
     @EventHandler
-    public void onPlayerJoin(final PlayerJoinEvent event)
+    public void onPlayerJoin( final PlayerJoinEvent event )
     {
-        // Display welcome message based on given configuration.
+        // Display welcome message based on configuration.
         if ( config.getBoolean( "welcomeMessage" ) )
             messenger.sendMessage(
                     event.getPlayer(),
                     "player.join",
                     new MsgEntry( "<PlayerName>", event.getPlayer().getDisplayName() )
             );
-        // // Send plugin's state to player.
+        // Send plugin's state to player.
         plugin.sendState( Collections.singletonList( event.getPlayer() ) );
+        // Set new player's notification sound.
+        plugin.setPlayerSound( event.getPlayer(), Sound.ENTITY_CHICKEN_EGG );
     }
 
     /**
@@ -63,7 +66,7 @@ public class EventListener implements Listener {
      * @param event The event.
      */
     @EventHandler( priority = EventPriority.HIGHEST )
-    public void onPlayerChat( AsyncPlayerChatEvent event )
+    public void onPlayerChat( final AsyncPlayerChatEvent event )
     {
         if ( plugin.isProximityChatOn() )
         {
@@ -73,7 +76,7 @@ public class EventListener implements Listener {
             // Remove recipients from event.
             event.getRecipients().clear();
 
-            // Send message to each nearby player.
+            // Get nearby players (within radius around character).
             ArrayList<Player> nearbyPlayers = getNearbyPlayers( sender, config.getDouble( "chatRange" ) );
 
             // Other players are within range.
@@ -88,6 +91,11 @@ public class EventListener implements Listener {
                     String message = buildMessage( sender, receiver, event.getMessage() );
                     // Send message to nearby player.
                     receiver.sendMessage( message );
+                    if ( config.getBoolean( "soundsEnabled" ) ){
+                        Sound notificationSound = plugin.getNotificationSound( receiver );
+                        // Get player's notification sound.
+                        receiver.playSound( receiver.getLocation(), notificationSound, 1.0F, 1.0F );
+                    }
                 }
                 // Notify sender about amount of nearby players.
                 messenger.sendMessage(

@@ -21,19 +21,16 @@ import java.util.List;
 public class ToggleCommand extends PlayerBPCommand {
 
     private final BetterProximityChat plugin;
-    private final YamlConfiguration config;
 
     /**
      * Toggle between proximity chat on or off.
      * @param messenger The messenger.
      * @param plugin The BetterProximityChat plugin.
-     * @param config The YAML configuration.
      */
-    public ToggleCommand( Messenger messenger, BetterProximityChat plugin, YamlConfiguration config )
+    public ToggleCommand( Messenger messenger, BetterProximityChat plugin )
     {
         super( messenger );
         this.plugin = plugin;
-        this.config = config;
     }
 
     @Override

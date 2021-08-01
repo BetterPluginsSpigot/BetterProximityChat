@@ -4,10 +4,10 @@ import be.betterplugins.core.commands.shortcuts.PlayerBPCommand;
 import be.betterplugins.core.messaging.messenger.Messenger;
 import be.betterplugins.core.messaging.messenger.MsgEntry;
 import io.github.michielproost.betterproximitychat.BetterProximityChat;
+import io.github.michielproost.betterproximitychat.events.SoundGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -19,28 +19,29 @@ import java.util.Map;
  */
 public class CommandHandler implements CommandExecutor {
 
-    // The messenger.
-    private final Messenger messenger;
     // Map every command to its name.
     private final Map<String, PlayerBPCommand> commands;
-    // Help command.
+
     private final HelpCommand helpCommand;
+    private final Messenger messenger;
 
     /**
      * Create a CommandHandler.
      * @param messenger The messenger.
      * @param plugin The BetterProximityChat plugin.
-     * @param config The YAML configuration.
+     * @param soundGUI The sound GUI.
      */
-    public CommandHandler(Messenger messenger, BetterProximityChat plugin, YamlConfiguration config )
+    public CommandHandler( Messenger messenger,
+                           BetterProximityChat plugin,
+                           SoundGUI soundGUI )
     {
         // Initialize the messenger.
         this.messenger = messenger;
 
-        // Toggle command.
-        PlayerBPCommand toggle = new ToggleCommand( messenger, plugin, config );
-        // Reload command.
+        // The command set.
+        PlayerBPCommand toggle = new ToggleCommand( messenger, plugin );
         PlayerBPCommand reload = new ReloadCommand( messenger, plugin );
+        PlayerBPCommand sound = new SoundCommand( messenger, soundGUI );
 
         // Create map.
         this.commands = new HashMap<String, PlayerBPCommand>()
@@ -55,6 +56,11 @@ public class CommandHandler implements CommandExecutor {
             for (String alias: reload.getAliases() ){
                 put(alias, reload);
             }
+            // Sound:
+            put(sound.getCommandName(), sound);
+            for (String alias: sound.getAliases() ){
+                put(alias, sound);
+            }
         }};
 
         // Help command.
@@ -62,10 +68,10 @@ public class CommandHandler implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender,
-                             @NotNull Command cmd,
-                             @NotNull String label,
-                             String[] args)
+    public boolean onCommand( @NotNull CommandSender sender,
+                              @NotNull Command cmd,
+                              @NotNull String label,
+                              String[] args )
     {
         // Get name of desired command.
         String commandName = args.length == 0 ? "help" : args[0].toLowerCase();
@@ -87,6 +93,13 @@ public class CommandHandler implements CommandExecutor {
         }
         else
         {
+            if (!commandName.equals("help"))
+                // Unrecognized command.
+                messenger.sendMessage(
+                    sender,
+                    "command.unrecognized",
+                    new MsgEntry( "<Command>", "/bpc " + commandName )
+                );
             // Execute help command.
             return helpCommand.execute( sender, cmd, args );
         }
